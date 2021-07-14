@@ -1,0 +1,43 @@
+﻿<CascadingValue Value="Visual">
+    <BitSlider DefaultHigherValue="DefaultHigherValue"
+               DefaultLowerValue="DefaultLowerValue"
+               DefaultValue="DefaultValue"
+               Min="Min"
+               Max="Max"
+               Step="Step"
+               HigherValue="HigherValue"
+               LowerValue="LowerValue"
+               @bind-Value="Value"
+               RangeValue="RangeValue"
+               OriginFromZero="OriginFromZero"
+               Label="@Label"
+               Ranged="Ranged"
+               ShowValue="ShowValue"
+               Vertical="Vertical"
+               ValueFormat="@ValueFormat"
+               IsReadonly="IsReadonly"
+               IsEnabled="IsEnabled">
+    </BitSlider>
+</CascadingValue>
+
+@code {
+    [Parameter] public Visual Visual { get; set; }
+    [Parameter] public int? DefaultHigherValue { get; set; }
+    [Parameter] public int? DefaultLowerValue { get; set; }
+    [Parameter] public int? DefaultValue { get; set; }
+    [Parameter] public int Min { get; set; }
+    [Parameter] public int Max { get; set; } = 10;
+    [Parameter] public int Step { get; set; } = 1;
+    [Parameter] public int? HigherValue { get; set; }
+    [Parameter] public int? LowerValue { get; set; }
+    [Parameter] public int? Value { get; set; }
+    [Parameter] public (int Lower, int Higher) RangeValue { get; set; }
+    [Parameter] public bool OriginFromZero { get; set; }
+    [Parameter] public string Label { get; set; }
+    [Parameter] public bool Ranged { get; set; }
+    [Parameter] public bool ShowValue { get; set; } = true;
+    [Parameter] public bool Vertical { get; set; }
+    [Parameter] public string ValueFormat { get; set; }
+    [Parameter] public bool IsReadonly { get; set; }
+    [Parameter] public bool IsEnabled { get; set; }
+}

@@ -1,0 +1,94 @@
+﻿@namespace Bit.Client.Web.BlazorUI
+@inherits BitComponentBase
+
+<div @ref="RootElement" 
+     class="@ClassBuilder.Value" 
+     style="@StyleBuilder.Value">
+    @if (Label.HasValue())
+    {
+        <label class="title" @ref="TitleRef">@Label</label>
+    }
+
+    @if (IsRanged)
+    {
+        @if (IsVertical)
+        {
+            @if (ShowValue)
+            {
+                <label class="valueLabel" @ref="ValueLabelRef">@GetValueDisplay(RangeValue.Lower)</label>
+            }
+            <div class="bit-slider-container" 
+                 @ref="ContainerRef" 
+                 style="@styleContainer">
+                <div class="bit-slider-box" role="group" aria-labelledby="multi-lbl" style="@styleProgress">
+                    @if (IsOriginFromZero)
+                    {
+                        <span class="zeroTick" style="left: calc(50% - 1px);"></span>
+                    }
+                    <input type="range" min="@Min" max="@Max" step="@Step" value="@RangeValue.Lower" @onchange="@HandleChange" @oninput="@(args => HandleInput(args, true))" disabled=@(!IsEnabled) />
+                    <input type="range" min="@Min" max="@Max" step="@Step" value="@RangeValue.Upper" @onchange="@HandleChange" @oninput="@(args => HandleInput(args, false))" disabled=@(!IsEnabled) />
+                </div>
+            </div>
+            @if (ShowValue)
+            {
+                <label class="valueLabel">@GetValueDisplay(RangeValue.Upper)</label>
+            }
+        }
+        else
+        {
+            <div class="bit-slider-container" @ref="ContainerRef">
+                @if (ShowValue)
+                {
+                    <label class="valueLabel">@GetValueDisplay(RangeValue.Lower)</label>
+                }
+                <div class="bit-slider-box" role="group" aria-labelledby="multi-lbl" style="@styleProgress">
+                    @if (IsOriginFromZero)
+                    {
+                        <span class="zeroTick" style="left: calc(50% - 1px);"></span>
+                    }
+                    <input type="range" min="@Min" max="@Max" step="@Step" value="@RangeValue.Lower" @onchange="@HandleChange" @oninput="@(args => HandleInput(args, true))" disabled=@(!IsEnabled) />
+                    <input type="range" min="@Min" max="@Max" step="@Step" value="@RangeValue.Upper" @onchange="@HandleChange" @oninput="@(args => HandleInput(args, false))" disabled=@(!IsEnabled) />
+                </div>
+                @if (ShowValue)
+                {
+                    <label class="valueLabel">@GetValueDisplay(RangeValue.Upper)</label>
+                }
+            </div>
+        }
+    }
+    else
+    {
+        @if (IsVertical)
+        {
+            <div class="bit-slider-container" @ref="ContainerRef">
+                @if (IsOriginFromZero)
+                {
+                    <span class="zeroTick" style="top: calc(50% - -2px);"></span>
+                }
+
+                <input type="range" min="@Min" max="@Max" step="@Step" value="@Value" @onchange="@HandleChange" @oninput="@HandleInput" style="@styleProgress" disabled=@(!IsEnabled) />
+            </div>
+
+            @if (ShowValue)
+            {
+                <label class="valueLabel">@GetValueDisplay(Value)</label>
+            }
+        }
+        else
+        {
+            <div class="bit-slider-container" @ref="ContainerRef">
+                @if (IsOriginFromZero)
+                {
+                    <span class="zeroTick" style="left: calc(50% - 29px);"></span>
+                }
+
+                <input type="range" min="@Min" max="@Max" step="@Step" value="@Value" @onchange="@HandleChange" @oninput="@HandleInput" style="@styleProgress" disabled=@(!IsEnabled) />
+
+                @if (ShowValue)
+                {
+                    <label class="valueLabel">@GetValueDisplay(Value)</label>
+                }
+            </div>
+        }
+    }
+</div>

@@ -1,0 +1,392 @@
+﻿@import "../colors.fluent.scss", "../../functions.scss";
+
+$BgDefult: $Grey90;
+$BgTrack: $Grey130;
+$BgHover: $BlizzardBlue;
+$BgTrackHover: $DarkAlt;
+
+
+.bit-slider-disabled-fluent {
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+.bit-slider .bit-slider-container {
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+}
+
+.bit-slider .zeroTick {
+    position: absolute;
+    background: $BgTrack;
+}
+
+.bit-slider input[type=range]:hover .zeroTick {
+    background: $BgTrackHover;
+}
+
+/*Horizontal*/
+.bit-slider.bit-slider-row .zeroTick,
+.bit-slider.bit-slider-ranged-row .zeroTick {
+    width: 1px;
+    height: 14px;
+}
+
+
+/*Vertical*/
+.bit-slider.bit-slider-column .zeroTick,
+.bit-slider.bit-slider-ranged-column .zeroTick {
+    width: 14px;
+    height: 1px;
+    margin-left: 18px;
+    z-index: 9999;
+}
+
+.bit-slider.bit-slider-ranged-column .zeroTick {
+    transform: rotate(270deg);
+    margin-top: 1px;
+}
+
+.bit-slider input[type=range] {
+    -webkit-appearance: none;
+}
+
+/*Horizontal*/
+.bit-slider.bit-slider-row input[type=range] {
+    flex-grow: 1;
+}
+
+/*progress support*/
+.bit-slider input[type=range] {
+    --range: calc(var(--max) - var(--min));
+    --ratio: calc((var(--value) - var(--min))/var(--range));
+    --sx: calc(.5*2em + var(--ratio)*(100% - 2em));
+}
+
+.bit-slider input[type=range]:focus {
+    outline: none;
+}
+
+/*webkit*/
+.bit-slider input[type=range]::-webkit-slider-thumb {
+    border-width: 2px;
+    border-style: solid;
+    border-color: $BgTrack;
+    border-radius: 10px;
+    box-sizing: border-box;
+    background: #fff;
+    width: 16px;
+    height: 16px;
+    margin-top: -6px;
+    -webkit-appearance: none;
+}
+
+.bit-slider input[type=range]::-webkit-slider-runnable-track {
+    height: 4px;
+    border-radius: 4px;
+    background: $BgDefult;
+    box-shadow: none;
+}
+
+.bit-slider input[type=range]::-webkit-slider-thumb:hover,
+.bit-slider input[type=range]::-webkit-slider-thumb:active,
+.bit-slider input[type=range]:hover::-webkit-slider-thumb,
+.bit-slider input[type=range]:active::-webkit-slider-thumb {
+    border-color: $BgTrackHover;
+}
+
+.bit-slider input[type=range]:hover::-webkit-slider-runnable-track {
+    background: $BgTrackHover;
+}
+
+.bit-slider input[type=range]:active::-webkit-slider-runnable-track {
+    background: $BgTrackHover;
+}
+
+.bit-slider input[type=range]::-webkit-slider-runnable-track {
+    background: linear-gradient($BgTrack,$BgTrack) 0/var(--sx) 100% no-repeat,$BgDefult;
+}
+
+.bit-slider input[type=range]:hover::-webkit-slider-runnable-track,
+.bit-slider input[type=range]:active::-webkit-slider-runnable-track {
+    background: linear-gradient($BgTrackHover,$BgTrackHover) 0/var(--sx) 100% no-repeat,$BgHover;
+}
+
+/*mozilla*/
+.bit-slider input[type=range]::-moz-range-thumb {
+    border-width: 2px;
+    border-style: solid;
+    border-color: $BgTrack;
+    border-radius: 10px;
+    box-sizing: border-box;
+    background: #fff;
+    width: 16px;
+    height: 16px;
+    margin-top: calc(max((1em - 1px - 0px)*.5,0px) - 2em*.5);
+}
+
+.bit-slider input[type=range]::-moz-range-track {
+    height: 4px;
+    border-radius: 4px;
+    background: $BgDefult;
+    box-shadow: none;
+}
+
+.bit-slider input[type=range]::-moz-range-thumb:hover,
+.bit-slider input[type=range]:hover::-moz-range-track,
+.bit-slider input[type=range]::-moz-range-thumb:active,
+.bit-slider input[type=range]:active::-moz-range-track {
+    border-color: $BgTrackHover;
+}
+
+.bit-slider input[type=range]::-moz-range-track {
+    background: linear-gradient($BgTrack,$BgTrack) 0/var(--sx) 100% no-repeat,$BgDefult;
+}
+
+.bit-slider input[type=range]:hover::-moz-range-track,
+.bit-slider input[type=range]:active::-moz-range-track {
+    background: linear-gradient($BgTrackHover,$BgTrackHover) 0/var(--sx) 100% no-repeat,$BgHover;
+}
+
+/*ms*/
+.bit-slider input[type=range]::-ms-fill-upper {
+    background: transparent;
+    border-color: transparent;
+}
+
+.bit-slider input[type=range]::-ms-fill-lower {
+    background: transparent;
+    border-color: transparent;
+}
+
+.bit-slider input[type=range]::-ms-thumb {
+    border-width: 2px;
+    border-style: solid;
+    border-color: $BgTrack;
+    border-radius: 10px;
+    box-sizing: border-box;
+    background: #fff;
+    width: 16px;
+    height: 16px;
+    margin-top: calc(max((1em - 1px - 0px)*.5,0px) - 2em*.5);
+}
+
+.bit-slider input[type=range]::-ms-track {
+    height: 4px;
+    border-radius: 4px;
+    background: $BgDefult;
+    box-shadow: none;
+}
+
+.bit-slider input[type=range]::-ms-thumb:hover,
+.bit-slider input[type=range]:hover::-ms-thumb,
+.bit-slider input[type=range]::-ms-thumb:active,
+.bit-slider input[type=range]:active::-ms-thumb {
+    border-color: $BgTrackHover;
+}
+
+.bit-slider input[type=range]::-ms-fill-lower {
+    height: 4px;
+    border-radius: 4px;
+    background: $BgDefult;
+    box-shadow: none;
+}
+
+.bit-slider input[type=range]:hover::-ms-fill-lower,
+.bit-slider input[type=range]:active::-ms-fill-lower {
+    background: $BgTrackHover;
+}
+
+.bit-slider label.title {
+    box-sizing: border-box;
+    box-shadow: none;
+    margin: 0;
+    display: block;
+    padding: 0;
+    overflow-wrap: break-word;
+}
+
+.bit-slider label.valueLabel {
+    box-sizing: border-box;
+    box-shadow: none;
+    margin: 0 8px;
+    padding: 5px 0;
+    overflow-wrap: break-word;
+    flex-shrink: 1;
+    width: 40px;
+    white-space: nowrap;
+}
+
+.bit-slider.bit-slider-column label.valueLabel,
+.bit-slider.bit-slider-ranged-column label.valueLabel {
+    text-align: center;
+}
+
+/*Horizontal*/
+.bit-slider-row input[type=range] {
+    width: 100%;
+}
+
+/*Vertical*/
+.bit-slider-column .bit-slider-container {
+    height: 100%;
+    width: 50px;
+    padding: 0;
+    margin-left: 0;
+    display: block;
+    position: relative;
+}
+
+.bit-slider-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bit-slider-column input[type=range] {
+    transform-origin: left;
+    margin: 0 25px;
+}
+
+/*Ranged*/
+.bit-slider.bit-slider-ranged-row .bit-slider-container {
+    display: flex;
+}
+
+.bit-slider.bit-slider-ranged-column {
+    width: 100%;
+}
+
+.bit-slider-ranged-row .bit-slider-box,
+.bit-slider-ranged-column .bit-slider-box {
+    --dif: calc(var(--max) - var(--min));
+    display: grid;
+    grid-template: repeat(2, -webkit-max-content) 4px/1fr 1fr;
+    grid-template: repeat(2, max-content) 4px/1fr 1fr;
+    position: relative;
+    margin: 1em auto;
+    width: 100%;
+    background: linear-gradient(0deg, $BgDefult 4px, transparent 0);
+}
+
+.bit-slider-ranged-row .bit-slider-box:hover,
+.bit-slider-ranged-column .bit-slider-box:hover {
+    background: linear-gradient(0deg, $BgHover 4px, transparent 0);
+}
+
+.bit-slider-ranged-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bit-slider-ranged-column .bit-slider-container {
+    transform: rotate(270deg);
+}
+
+.bit-slider-ranged-row .bit-slider-box::before, .bit-slider-ranged-row .bit-slider-box::after,
+.bit-slider-ranged-column .bit-slider-box::before, .bit-slider-ranged-column .bit-slider-box::after {
+    grid-column: 1/span 2;
+    grid-row: 3;
+    height: 4px;
+    background: $BgTrack;
+    content: "";
+}
+
+.bit-slider-ranged-row .bit-slider-box:hover::before, .bit-slider-ranged-row .bit-slider-box:hover::after,
+.bit-slider-ranged-column .bit-slider-box:hover::before, .bit-slider-ranged-column .bit-slider-box:hover::after {
+    background: $BgTrackHover;
+}
+
+.bit-slider-ranged-row .bit-slider-box::before,
+.bit-slider-ranged-column .bit-slider-box::before {
+    margin-left: calc((var(--l) - var(--min))/var(--dif)*100%);
+    width: calc((var(--h) - var(--l))/var(--dif)*100%);
+}
+
+.bit-slider-ranged-row .bit-slider-box::after,
+.bit-slider-ranged-column .bit-slider-box::after {
+    margin-left: calc((var(--h) - var(--min))/var(--dif)*100%);
+    width: calc((var(--l) - var(--h))/var(--dif)*100%);
+}
+
+.bit-slider.bit-slider-ranged-row .zeroTick {
+    z-index: 2;
+    margin-top: -5px;
+}
+
+.bit-slider.bit-slider-ranged-column .zeroTick {
+    z-index: 2;
+    margin-left: -5px;
+}
+
+.bit-slider [id=multi-lbl] {
+    grid-column: 1/span 2;
+}
+
+.bit-slider.bit-slider-ranged-row input[type=range],
+.bit-slider.bit-slider-ranged-column input[type=range] {
+    grid-column: 1/span 2;
+    grid-row: 3;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    margin: 0;
+    background: none;
+    /* get rid of white Chrome background */
+    --col: #000;
+    pointer-events: none;
+}
+
+.bit-slider input[type=range]::-webkit-slider-runnable-track, .bit-slider input[type=range]::-webkit-slider-thumb, .bit-slider input[type=range] {
+    -webkit-appearance: none;
+}
+
+.bit-slider.bit-slider-ranged-row input[type=range]::-webkit-slider-runnable-track,
+.bit-slider.bit-slider-ranged-column input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 100%;
+    background: none;
+}
+
+.bit-slider.bit-slider-ranged-row input[type=range]::-moz-range-track,
+.bit-slider.bit-slider-ranged-column input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 100%;
+    background: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    border: none;
+    /* get rid of Firefox thumb border */
+    width: 2em;
+    height: 4em;
+    border-radius: 0;
+    /* get rid of Firefox corner rounding */
+    background: linear-gradient(90deg, #fff 2px, transparent 0) calc(1em - 1px), radial-gradient(circle, var(--col) calc(1em - 1px), transparent 1em);
+    pointer-events: auto;
+}
+
+input[type=range]::-moz-range-thumb {
+    border: none;
+    /* get rid of Firefox thumb border */
+    width: 2em;
+    height: 4em;
+    border-radius: 0;
+    /* get rid of Firefox corner rounding */
+    background: linear-gradient(90deg, #fff 2px, transparent 0) calc(1em - 1px), radial-gradient(circle, var(--col) calc(1em - 1px), transparent 1em);
+    pointer-events: auto;
+}
+
+.bit-slider.bit-slider-ranged-row input[type=range]:focus
+.bit-slider.bit-slider-ranged-column input[type=range]:focus {
+    z-index: 2;
+    outline: dotted 1px currentcolor;
+}
+
+.bit-slider.bit-slider-ranged-row input[type=range]:focus, .bit-slider.bit-slider-ranged-row input[type=range]:focus + output,
+.bit-slider.bit-slider-ranged-column input[type=range]:focus, .bit-slider.bit-slider-ranged-column input[type=range]:focus + output {
+    --col: darkorange;
+}

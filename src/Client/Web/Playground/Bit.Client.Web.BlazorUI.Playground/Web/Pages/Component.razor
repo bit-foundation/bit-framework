@@ -698,3 +698,69 @@
     <BitDropDown IsMultiSelect="true" Items="GetDropdownItems()" Placeholder="Select options">
     </BitDropDown>
 </div>
+
+<div class="toggle-container">
+    <h2>BitToggle</h2>
+    <h3>Basics</h3>
+
+    <BitToggle @bind-IsChecked="IsToggleChecked" IsEnabled="true" OnText="On" OffText="Off">Enabled and checked</BitToggle>
+    <br />
+    <BitToggle @bind-IsChecked="IsToggleUnChecked" IsEnabled="true" OnText="On" OffText="Off">Enabled and unchecked</BitToggle>
+    <br />
+    <BitToggle IsChecked="true" IsEnabled="false" OnText="On" OffText="Off">Disabled and checked</BitToggle>
+    <br />
+    <BitToggle IsChecked="false" IsEnabled="false" OnText="On" OffText="Off">Disabled and unchecked</BitToggle>
+    <br />
+    <BitToggle @bind-IsChecked="IsToggleUnChecked" IsEnabled="true" IsInlineLabel="true" OnText="On" OffText="Off">With inline label</BitToggle>
+    <br />
+    <BitToggle IsChecked="false" IsEnabled="false" IsInlineLabel="true" OnText="On" OffText="Off">Disabled with inline label</BitToggle>
+    <br />
+    <BitToggle @bind-IsChecked="IsToggleUnChecked" IsEnabled="true" IsInlineLabel="true">With inline label and without onText and offText</BitToggle>
+    <br />
+    <BitToggle IsChecked="false" IsEnabled="false" IsInlineLabel="true">Disabled With inline label and without onText and offText</BitToggle>
+    <br />
+    <h3>Toggles with Custom Labels</h3>
+    <br />
+    <BitToggle @bind-IsChecked="IsToggleUnChecked" IsEnabled="true" OnText="On" OffText="Off">Custom label <i class="bit-icon bit-icon--Info"></i></BitToggle>
+    <br />
+    <BitToggle @bind-IsChecked="IsToggleUnChecked" IsEnabled="true" OnText="On" OffText="Off" IsInlineLabel="true">Custom inline label <i class="bit-icon bit-icon--Info"></i></BitToggle>
+    <br />
+    <BitToggle @bind-IsChecked="IsToggleChecked" IsEnabled="true" OnText="On" OffText="Off">Enabled and checked</BitToggle>
+    <br />
+    <BitButton OnClick="() => IsToggleChecked = true">Make Toggle Check</BitButton>
+    <br />
+    <br />
+</div>
+
+<div class="slider-container">
+    <h2>BitSlider</h2>
+    <br />
+    <h3>Enabled</h3>
+    <div>
+        <BitSlider Label="Test Text" DefaultValue="3" IsEnabled="false" />
+        <BitSlider Label="Test Text" DefaultValue="3" />
+        <BitSlider Label="Test Text" Min="0" Max="10" DefaultValue="3" />
+        <BitSlider Label="Test Text" Min="0" Max="100" DefaultValue="30" ValueFormat="P00" />
+
+        <BitSlider Label="Test Text2" Min="0" Max="1000" DefaultValue="30" ValueFormat="P01" OriginFromZero="true" />
+    </div>
+
+    <div style="height: 250px; margin: 50px; display: flex; flex-flow: row nowrap;">
+        <BitSlider Label="Test Text" DefaultValue="3" Vertical="true" IsEnabled="false" />
+        <BitSlider Label="Test Text2" Min="0" Max="1000" DefaultValue="30" ValueFormat="P01" OriginFromZero="true" Vertical="true" />
+    </div>
+
+    <h3>Ranged</h3>
+    <div style="height: 100px; margin: 50px 0 0 50px; padding: 20px;">
+        <BitSlider Label="Test Text" DefaultHigherValue="5" DefaultLowerValue="2" Ranged="true" IsEnabled="false" />
+        <BitSlider Label="Test Text" DefaultHigherValue="5" DefaultLowerValue="2" Ranged="true" OriginFromZero="true" />
+    </div>
+
+    <div style="height: 500px; margin: 50px 0 0 50px; width: 85px; padding: 20px; display: flex;">
+        <BitSlider Label="Test Text" DefaultHigherValue="5" DefaultLowerValue="2" Ranged="true" Vertical="true" IsEnabled="false" />
+        <BitSlider Label="Test Text" DefaultHigherValue="5" DefaultLowerValue="2" Ranged="true" OriginFromZero="true" Vertical="true" />
+    </div>
+
+</div>
+
+<hr />
