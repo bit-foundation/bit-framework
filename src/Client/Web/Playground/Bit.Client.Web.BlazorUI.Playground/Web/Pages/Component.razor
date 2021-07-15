@@ -698,3 +698,8 @@
     <BitDropDown IsMultiSelect="true" Items="GetDropdownItems()" Placeholder="Select options">
     </BitDropDown>
 </div>
+
+<div>
+    <BitColorPicker @bind-Color="SelectedColor" ShowPreview="false" AlphaType="AlphaType.Alpha"></BitColorPicker>
+    @SelectedColor
+</div>

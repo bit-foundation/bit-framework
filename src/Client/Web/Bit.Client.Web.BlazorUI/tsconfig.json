@@ -1,7 +1,9 @@
 {
-  "compileOnSave": true,
-  "compilerOptions": {
-    "strict": true,
-    "outFile": "wwwroot/scripts/bit.client.web.js"
-  }
+    "compileOnSave": true,
+    "compilerOptions": {
+        "strict": true,
+        "lib": [ "DOM", "ESNext" ],
+        "outFile": "wwwroot/scripts/bit.client.web.js"
+
+    }
 }

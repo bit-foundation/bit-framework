@@ -25,6 +25,9 @@ namespace Bit.Client.Web.BlazorUI.Playground.Web.Pages
         private double BasicSpinButtonDisableValue = 20;
         private double SpinButtonWithCustomHandlerValue = 14;
         private double SpinButtonWithLabelAboveValue = 7;
+
+        public string SelectedColor { get; set; } = "rgb(243,33,105,0.30)";
+
         private void HandleSpinButtonValueChange(double value)
         {
             SpinButtonWithCustomHandlerValue = value;
