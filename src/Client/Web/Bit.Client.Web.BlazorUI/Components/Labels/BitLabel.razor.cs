@@ -6,8 +6,14 @@ namespace Bit.Client.Web.BlazorUI
     {
         private bool isRequired;
 
+        /// <summary>
+        /// The for attribute specifies which form element a label is bound to
+        /// </summary>
         [Parameter] public string? For { get; set; }
 
+        /// <summary>
+        /// Whether the label is required or not
+        /// </summary>
         [Parameter]
         public bool IsRequired
         {
@@ -19,6 +25,9 @@ namespace Bit.Client.Web.BlazorUI
             }
         }
 
+        /// <summary>
+        /// The content of label, It can be Any custom tag or a text
+        /// </summary>
         [Parameter] public RenderFragment? ChildContent { get; set; }
 
         protected override string RootElementClass => "bit-lbl";
