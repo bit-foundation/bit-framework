@@ -10,7 +10,6 @@ namespace Bit.Client.Web.BlazorUI
     {
         private string focusClass = "";
         private string expandClass = "";
-        private bool isOpen = false;
         private bool isMultiSelect = false;
 
         [Parameter]
@@ -23,17 +22,7 @@ namespace Bit.Client.Web.BlazorUI
                 ClassBuilder.Reset();
             }
         }
-        [Parameter]
-        public bool IsOpen
-        {
-            get => isOpen;
-            set
-            {
-                isOpen = value;
-                ClassBuilder.Reset();
-            }
-        }
-
+        
         [Parameter] public List<DropDownItem> Items { get; set; } = new List<DropDownItem>();
         [Parameter] public string? Placeholder { get; set; }
 
@@ -76,27 +65,23 @@ namespace Bit.Client.Web.BlazorUI
                 ? string.Empty
                 : $"{RootElementClass}-{"hasValue"}-{VisualClassRegistrar()}");
 
-            ClassBuilder.Register(() => IsOpen is false
-                ? string.Empty
-                : $"{RootElementClass}-{"opened"}-{VisualClassRegistrar()}");
-
             ClassBuilder.Register(() => IsMultiSelect is false
                 ? string.Empty
                 : $"{RootElementClass}-{"multi"}-{VisualClassRegistrar()}");
+
+            ClassBuilder.Register(() => "bit-cal-com");
         }
 
         protected virtual async Task HandleClick(MouseEventArgs e)
         {
             if (IsEnabled)
             {
-                if (isOpen is false)
+                if (FocusClass.HasNoValue())
                 {
-                    isOpen = true;
                     FocusClass = "focused";
                 }
                 else
                 {
-                    isOpen = false;
                     FocusClass = "";
                 }
                 await OnClick.InvokeAsync(e);
@@ -105,7 +90,6 @@ namespace Bit.Client.Web.BlazorUI
 
         protected virtual async Task HandleItemClick(DropDownItem? selectedItem)
         {
-            isOpen = false;
             if (selectedItem is not null)
             {
                 if (selectedItem.IsEnabled)

@@ -16,46 +16,43 @@
     <span @onclick="HandleClick">
         <i class="bit-icon"></i>
     </span>
-    @if (isOpen)
-    {
-        <div>
-            @foreach (DropDownItem item in Items)
+    <div class="bit-callout" style="display: none;">
+        @foreach (DropDownItem item in Items)
+        {
+            if (item.ItemType == DropDownItemType.Header)
             {
-                if (item.ItemType == DropDownItemType.Header)
+                <div class="@RootElementClass-head-@VisualClassRegistrar()">
+                    @item.Text
+                </div>
+            }
+            else if (item.ItemType == DropDownItemType.Normal)
+            {
+                @if (IsMultiSelect)
                 {
-                    <div class="@RootElementClass-head-@VisualClassRegistrar()">
+                    <BitCheckbox @bind-IsChecked="item.IsSelected"
+                                 IsEnabled="item.IsEnabled"
+                                 OnChange="(isChecked) => HandleItemClick(isChecked?item:null)">
                         @item.Text
-                    </div>
+                    </BitCheckbox>
                 }
-                else if (item.ItemType == DropDownItemType.Normal)
+                else
                 {
-                    @if (IsMultiSelect)
-                    {
-                        <BitCheckbox @bind-IsChecked="item.IsSelected"
-                                     IsEnabled="item.IsEnabled"
-                                     OnChange="(isChecked) => HandleItemClick(isChecked?item:null)">
-                            @item.Text
-                        </BitCheckbox>
-                    }
-                    else
-                    {
-                        <button class="@(Items.Any(prop=>prop.IsSelected && prop.Value.Equals(item.Value))
+                    <button class="@(Items.Any(prop=>prop.IsSelected && prop.Value.Equals(item.Value))
                                            ?$"{RootElementClass}-slc-{VisualClassRegistrar()}"
                                            :"")"
-                                type="button"
-                                title="@item.Text"
-                                disabled=@(!item.IsEnabled)
-                                @onclick="()=> HandleItemClick(item)">
-                            @item.Text
-                        </button>
-                    }
-                }
-                else if (item.ItemType == DropDownItemType.Divider)
-                {
-                    <div class="@RootElementClass-div-@VisualClassRegistrar()">
-                    </div>
+                            type="button"
+                            title="@item.Text"
+                            disabled=@(!item.IsEnabled)
+                            @onclick="()=> HandleItemClick(item)">
+                        @item.Text
+                    </button>
                 }
             }
-        </div>
-    }
+            else if (item.ItemType == DropDownItemType.Divider)
+            {
+                <div class="@RootElementClass-div-@VisualClassRegistrar()">
+                </div>
+            }
+        }
+    </div>
 </div>

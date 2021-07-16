@@ -41,7 +41,7 @@ namespace Bit.Client.Web.BlazorUI.Tests.Inputs
             var visualClass = visual == Visual.Cupertino ? "cupertino" : visual == Visual.Material ? "material" : "fluent";
             Assert.AreEqual(count, com.Instance.CurrentCount);
             Assert.IsTrue(bitChoiceGroup.ClassList.Contains($"bit-drp-{className}-{visualClass}"));
-            Assert.IsTrue(bitChoiceGroup.Children.Count().Equals(isCalloutOpen ? 3 : 2));
+            Assert.IsTrue(!isCalloutOpen || bitChoiceGroup.Children[2].Attributes.Any(p => p.Name.Equals("style")));
         }
 
         [DataTestMethod,
@@ -59,8 +59,8 @@ namespace Bit.Client.Web.BlazorUI.Tests.Inputs
             var items = new List<DropDownItem>
             {
                 new() {ItemType = DropDownItemType.Header, IsEnabled = isEnabled},
-                new() {ItemType = DropDownItemType.Normal, IsEnabled = isEnabled},
-                new() {ItemType = DropDownItemType.Normal, IsEnabled = isEnabled},
+                new() {ItemType = DropDownItemType.Normal, IsEnabled = isEnabled, Text = "Test1", Value = "Test value1"},
+                new() {ItemType = DropDownItemType.Normal, IsEnabled = isEnabled, Text = "Test2", Value = "Test value2"},
                 new() {ItemType = DropDownItemType.Divider, IsEnabled = isEnabled}
             };
             var com = RenderComponent<BitDropDownTest>(
@@ -78,13 +78,13 @@ namespace Bit.Client.Web.BlazorUI.Tests.Inputs
         }
 
         [DataTestMethod,
-           DataRow(Visual.Fluent, true, 2),
+           DataRow(Visual.Fluent, true, 3),
            DataRow(Visual.Fluent, false, 1),
 
-           DataRow(Visual.Cupertino, true, 2),
+           DataRow(Visual.Cupertino, true, 3),
            DataRow(Visual.Cupertino, false, 1),
 
-           DataRow(Visual.Material, true, 2),
+           DataRow(Visual.Material, true, 3),
            DataRow(Visual.Material, false, 1)
         ]
         public async Task BitDropDownMultiSelectShouldRespectIsEnabled(Visual visual, bool isEnabled, int count)
