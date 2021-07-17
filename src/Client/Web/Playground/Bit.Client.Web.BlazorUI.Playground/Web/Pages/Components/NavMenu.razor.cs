@@ -20,7 +20,7 @@ namespace Bit.Client.Web.BlazorUI.Playground.Web.Pages.Components
                      new BitNavLinkItem { Name= "Link", Key = "Link", Url = "/components/links" },
                      new BitNavLinkItem { Name= "Rating", Key = "Rating", Url = "/components/rating" },
                      new BitNavLinkItem { Name= "SearchBox", Key = "SearchBox", Url = "/components/searchbox" },
-                     new BitNavLinkItem { Name= "TextField", Key = "TextField", Url = "#" },
+                     new BitNavLinkItem { Name= "TextField", Key = "TextField", Url = "/components/textfield" },
                      new BitNavLinkItem { Name= "Toggle", Key = "Toggle", Url = "#" }
                 }
             },
