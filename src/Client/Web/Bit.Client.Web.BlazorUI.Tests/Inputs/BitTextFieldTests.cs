@@ -9,22 +9,22 @@ namespace Bit.Client.Web.BlazorUI.Tests.Inputs
     public class BitTextFieldTests : BunitTestContext
     {
         [DataTestMethod,
-            DataRow(Visual.Fluent, true, true),
-            DataRow(Visual.Fluent, false, true),
-            DataRow(Visual.Fluent, true, false),
-            DataRow(Visual.Fluent, false, false),
+            DataRow(Visual.Fluent, true, true, true),
+            DataRow(Visual.Fluent, false, true, false),
+            DataRow(Visual.Fluent, true, false, true),
+            DataRow(Visual.Fluent, false, false, false),
 
-            DataRow(Visual.Cupertino, true, true),
-            DataRow(Visual.Cupertino, false, true),
-            DataRow(Visual.Cupertino, true, false),
-            DataRow(Visual.Cupertino, false, false),
+            DataRow(Visual.Cupertino, true, true, true),
+            DataRow(Visual.Cupertino, false, true, false),
+            DataRow(Visual.Cupertino, true, false, true),
+            DataRow(Visual.Cupertino, false, false, false),
 
-            DataRow(Visual.Material, true, true),
-            DataRow(Visual.Material, false, true),
-            DataRow(Visual.Material, true, false),
-            DataRow(Visual.Material, false, false)
+            DataRow(Visual.Material, true, true, true),
+            DataRow(Visual.Material, false, true, false),
+            DataRow(Visual.Material, true, false, true),
+            DataRow(Visual.Material, false, false, false)
         ]
-        public void BitTextFieldShouldTakeCorrectTypeAndVisual(Visual visual, bool isEnabled, bool IsMultiline)
+        public void BitTextFieldShouldTakeCorrectTypeAndVisual(Visual visual, bool isEnabled, bool IsMultiline, bool isRequired)
         {
             var component = RenderComponent<BitTextFieldTest>(
                 parameters =>
@@ -32,16 +32,20 @@ namespace Bit.Client.Web.BlazorUI.Tests.Inputs
                     parameters.Add(p => p.Visual, visual);
                     parameters.Add(p => p.IsEnabled, isEnabled);
                     parameters.Add(p => p.IsMultiLine, IsMultiline);
+                    parameters.Add(p => p.IsRequired, isRequired);
                 });
 
             var bitTextField = component.Find(".bit-txt");
+            var bitTextFieldFieldGroup = component.Find(".bit-txt > div");
 
             var isEnabledClass = isEnabled ? "enabled" : "disabled";
             var visualClass = visual == Visual.Cupertino ? "cupertino" : visual == Visual.Material ? "material" : "fluent";
 
             Assert.IsTrue(bitTextField.ClassList.Contains($"bit-txt-{isEnabledClass}-{visualClass}"));
 
-            Assert.AreEqual(IsMultiline ? "TEXTAREA" : "INPUT", bitTextField.FirstElementChild.TagName);
+            Assert.AreEqual(IsMultiline ? "TEXTAREA" : "INPUT", bitTextFieldFieldGroup.FirstElementChild.TagName);
+
+            Assert.AreEqual(bitTextField.ClassList.Contains($"bit-txt-required-{visualClass}"), isRequired);
         }
 
         [DataTestMethod,
@@ -67,6 +71,19 @@ namespace Bit.Client.Web.BlazorUI.Tests.Inputs
             {
                 Assert.AreEqual(bitTextField.GetAttribute("value"), value);
             }
+        }
+
+        [DataTestMethod, DataRow("this is label")]
+        public void BitTextFieldLabel(string label)
+        {
+            var com = RenderComponent<BitTextFieldTest>(parameters =>
+            {
+                parameters.Add(p => p.Label, label);
+            });
+
+            var bitTextFieldLabel = com.Find(".bit-txt label").TextContent;
+
+            Assert.AreEqual(label, bitTextFieldLabel);
         }
 
         [DataTestMethod,
@@ -126,14 +143,15 @@ namespace Bit.Client.Web.BlazorUI.Tests.Inputs
                 });
 
             var bitTextField = component.Find(".bit-txt");
-            var bitTextFieldRevealPassword = component.Find(".bit-txt > span");
+            var bitTextFieldFieldGroup = component.Find(".bit-txt > div");
+            var bitTextFieldRevealPassword = component.Find(".bit-txt > div > span");
 
-            Assert.AreEqual("Password", bitTextField.FirstElementChild.GetAttribute("type"));
+            Assert.AreEqual("Password", bitTextFieldFieldGroup.FirstElementChild.GetAttribute("type"));
             Assert.IsTrue(bitTextFieldRevealPassword.FirstElementChild.ClassList.Contains($"bit-icon--RedEye"));
 
             bitTextFieldRevealPassword.Click();
 
-            Assert.AreEqual("Text", bitTextField.FirstElementChild.GetAttribute("type"));
+            Assert.AreEqual("Text", bitTextFieldFieldGroup.FirstElementChild.GetAttribute("type"));
             Assert.IsTrue(bitTextFieldRevealPassword.FirstElementChild.ClassList.Contains($"bit-icon--Hide"));
         }
 

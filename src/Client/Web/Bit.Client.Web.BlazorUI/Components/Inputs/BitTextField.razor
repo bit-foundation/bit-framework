@@ -5,53 +5,62 @@
      @attributes="HtmlAttributes"
      style="@StyleBuilder.Value"
      class="@ClassBuilder.Value">
-    @if (IsMultiLine && Type == TextFieldType.Text)
-    {
-        <textarea rows="3"
-                  disabled=@(!IsEnabled)
-                  readonly=@IsReadonly
-                  placeholder="@Placeholder"
-                  maxlength="@MaxLength"
-                  aria-label="@AriaLabel"
-                  @onclick="@HandleClick"
-                  @onfocusin="@HandleFocusIn"
-                  @onfocusout="@HandleFocusOut"
-                  @onfocus="@HandleFocus"
-                  @oninput="@HandleChange"
-                  @onkeydown="@HandleKeyDown"
-                  @onkeyup="@HandleKeyUp">
+    <label for="@_inputId">
+        @Label
+    </label>
+    <div>
+        @if (IsMultiLine && Type == TextFieldType.Text)
+        {
+            <textarea id="@_inputId"
+                      rows="3"
+                      disabled=@(!IsEnabled)
+                      readonly=@IsReadonly
+                      required=@IsRequired
+                      placeholder="@Placeholder"
+                      maxlength="@MaxLength"
+                      aria-label="@AriaLabel"
+                      @onclick="@HandleClick"
+                      @onfocusin="@HandleFocusIn"
+                      @onfocusout="@HandleFocusOut"
+                      @onfocus="@HandleFocus"
+                      @oninput="@HandleChange"
+                      @onkeydown="@HandleKeyDown"
+                      @onkeyup="@HandleKeyUp">
             @Value
         </textarea>
-    }
-    else
-    {
-        <input disabled=@(!IsEnabled)
-               readonly=@IsReadonly
-               type="@ElementType"
-               value="@Value"
-               placeholder="@Placeholder"
-               maxlength="@MaxLength"
-               aria-label="@AriaLabel"
-               @onclick="@HandleClick"
-               @onfocusin="@HandleFocusIn"
-               @onfocusout="@HandleFocusOut"
-               @onfocus="@HandleFocus"
-               @oninput="@HandleChange"
-               @onkeydown="@HandleKeyDown"
-               @onkeyup="@HandleKeyUp" />
-    }
+        }
+        else
+        {
+            <input id="@_inputId"
+                   disabled=@(!IsEnabled)
+                   readonly=@IsReadonly
+                   required=@IsRequired
+                   type="@ElementType"
+                   value="@Value"
+                   placeholder="@Placeholder"
+                   maxlength="@MaxLength"
+                   aria-label="@AriaLabel"
+                   @onclick="@HandleClick"
+                   @onfocusin="@HandleFocusIn"
+                   @onfocusout="@HandleFocusOut"
+                   @onfocus="@HandleFocus"
+                   @oninput="@HandleChange"
+                   @onkeydown="@HandleKeyDown"
+                   @onkeyup="@HandleKeyUp" />
+        }
 
-    @if (CanRevealPassword && Type == TextFieldType.Password)
-    {
-        <span class="clickable" @onclick="TogglePasswordRevealIcon">
-            <i class="bit-icon bit-icon--@(ElementType == TextFieldType.Text ? "Hide" : "RedEye")"></i>
-        </span>
-    }
+        @if (CanRevealPassword && Type == TextFieldType.Password)
+        {
+            <span class="clickable" @onclick="TogglePasswordRevealIcon">
+                <i class="bit-icon bit-icon--@(ElementType == TextFieldType.Text ? "Hide" : "RedEye")"></i>
+            </span>
+        }
 
-    @if (IconName is not null)
-    {
-        <span>
-            <i class="bit-icon bit-icon--@IconName"></i>
-        </span>
-    }
+        @if (IconName is not null)
+        {
+            <span>
+                <i class="bit-icon bit-icon--@IconName"></i>
+            </span>
+        }
+    </div>
 </div>

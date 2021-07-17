@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 
@@ -8,8 +9,10 @@ namespace Bit.Client.Web.BlazorUI
     {
         private bool isMultiLine;
         private bool isReadonly;
+        private bool isRequired;
         private string focusClass = "";
         private TextFieldType type = TextFieldType.Text;
+        private Guid _inputId = Guid.NewGuid();
 
         [Parameter] public int MaxLength { get; set; } = -1;
 
@@ -18,6 +21,8 @@ namespace Bit.Client.Web.BlazorUI
         [Parameter] public string? Value { get; set; }
 
         [Parameter] public string? Placeholder { get; set; }
+
+        [Parameter] public string? Label { get; set; }
 
         [Parameter]
         public bool CanRevealPassword { get; set; }
@@ -29,6 +34,17 @@ namespace Bit.Client.Web.BlazorUI
             set
             {
                 isReadonly = value;
+                ClassBuilder.Reset();
+            }
+        }
+
+        [Parameter]
+        public bool IsRequired
+        {
+            get => isRequired;
+            set
+            {
+                isRequired = value;
                 ClassBuilder.Reset();
             }
         }
@@ -94,6 +110,9 @@ namespace Bit.Client.Web.BlazorUI
 
             ClassBuilder.Register(() => IsEnabled && IsReadonly
                                         ? $"{RootElementClass}-readonly-{VisualClassRegistrar()}" : string.Empty);
+
+            ClassBuilder.Register(() => IsEnabled && IsRequired
+                                        ? $"{RootElementClass}-required-{VisualClassRegistrar()}" : string.Empty);
 
             ClassBuilder.Register(() => FocusClass.HasValue()
                                         ? $"{RootElementClass}-{FocusClass}-{VisualClassRegistrar()}" : string.Empty);

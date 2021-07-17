@@ -4,6 +4,7 @@
                   Type="Type"
                   Placeholder="@Placeholder"
                   IsReadonly="IsReadOnly"
+                  IsRequired="IsRequired"
                   IsEnabled="IsEnabled"
                   IconName="@IconName"
                   Value="@Value"
@@ -15,7 +16,8 @@
                   OnFocusOut="HandleFocusOut"
                   OnKeyDown="HandleKeyDown"
                   OnKeyUp="HandleKeyUp"
-                  AriaLabel="@AriaLabel">>
+                  AriaLabel="@AriaLabel"
+                  Label="@Label">
     </BitTextField>
 </CascadingValue>
 
@@ -26,11 +28,13 @@
     [Parameter] public bool IsMultiLine { get; set; } = false;
     [Parameter] public bool IsEnabled { get; set; }
     [Parameter] public bool IsReadOnly { get; set; }
+    [Parameter] public bool IsRequired { get; set; }
     [Parameter] public string Placeholder { get; set; }
     [Parameter] public string Value { get; set; }
     [Parameter] public bool CanRevealPassword { get; set; }
     [Parameter] public TextFieldType Type { get; set; }
     [Parameter] public string AriaLabel { get; set; }
+    [Parameter] public string Label { get; set; }
 
     public void HandleKeyDown(KeyboardEventArgs e)
     {
